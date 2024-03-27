@@ -1,0 +1,9 @@
+@ Infinit Fibonacci loop
+i = 0
+j = 1
+i
+k = i + j
+i = j
+j = k
+i
+GOTO 4

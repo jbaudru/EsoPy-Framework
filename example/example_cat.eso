@@ -1,0 +1,4 @@
+@ Simple Cat program
+INPUT a
+a
+GOTO 1
