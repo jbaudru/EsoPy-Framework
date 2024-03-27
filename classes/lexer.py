@@ -20,7 +20,7 @@ class Lexer:
         while self.pos < len(self.text) and self.text[self.pos].isalpha():
             self.pos += 1
         token = self.text[start:self.pos]
-        if token in ['GOTO', 'INPUT']:
+        if token in ['GOTO', 'GOIF', 'INPUT']:
             return Token(token, token, self.line)
         else:
             self.pos = start  # Reset the position if it's not a keyword

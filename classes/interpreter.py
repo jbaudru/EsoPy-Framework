@@ -23,7 +23,24 @@ class Interpreter:
             
         else:
             self.error(self.current_token.line)
-    
+            
+    def goif(self):
+        self.eat('GOIF')
+        if self.current_token.type == 'NUMBER':
+            line_number = self.current_token.value
+            self.eat('NUMBER')
+            if self.current_token.type == 'IDENTIFIER':
+                var_name = self.current_token.value
+                self.eat('IDENTIFIER')
+                if var_name in self.symbol_table:
+                    condition = self.symbol_table[var_name]
+                    
+                    if condition == 0:
+                        self.lexer.line = line_number - 1
+                        self.lexer.text = self.full_text[self.lexer.line]
+        else:
+            self.error(self.current_token.line)
+            
     def input_value(self):
         self.eat('INPUT')
         if self.current_token.type == 'IDENTIFIER':
@@ -50,6 +67,8 @@ class Interpreter:
         while self.current_token.type not in ('EOF'):
             if self.current_token.type == 'GOTO':
                 self.goto()
+            elif self.current_token.type == 'GOIF':
+                self.goif()
             elif self.current_token.type == 'INPUT':
                 self.input_value()
             elif self.current_token.type == 'IDENTIFIER':

@@ -1,9 +1,12 @@
-@ Infinit Fibonacci loop
+@ Fibonacci sequence
 i = 0
 j = 1
-i
+counter = 10
+j
 k = i + j
 i = j
 j = k
-i
-GOTO 4
+counter = counter - 1
+GOIF 12 counter
+GOTO 5
+x = "end"

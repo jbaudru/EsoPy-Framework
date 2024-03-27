@@ -1,0 +1,17 @@
+@ This code prints a small triangle in * char
+size = 5
+
+charstar = "*"
+row = 1
+
+line = ""
+row = row + 1
+line = line + charstar
+row = row - 1
+GOIF 7 row
+line
+size = size - 1
+GOIF 17 size
+GOTO 8
+
+x = "end"
