@@ -9,6 +9,8 @@ Esoteric programming languages, or esolangs, are programming languages designed 
 
 **You are free to modify and extend this template to create your own esolangs.**
 
+**TODO:** Add a mapping layer for tokens inside the framework and tokens should by the user.
+
 ## Files
 - `run.py`: This is the entry point of the project. It reads a *.eso* file line by line, passes each line to the lexer and interpreter, and prints the interpreter's symbol table after each line.
 - `lexer.py`: This file contains the Lexer class which is responsible for breaking the input code into tokens. It also contains the Token class which represents a token.
