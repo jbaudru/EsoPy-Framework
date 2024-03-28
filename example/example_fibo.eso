@@ -1,7 +1,7 @@
 @ Fibonacci sequence
 i = 0
 j = 1
-counter = 10
+INPUT counter
 j
 k = i + j
 i = j
@@ -9,4 +9,4 @@ j = k
 counter = counter - 1
 GOIF 12 counter
 GOTO 5
-x = "end"
+END

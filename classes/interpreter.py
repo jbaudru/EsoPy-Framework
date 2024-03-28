@@ -5,15 +5,16 @@ class Interpreter:
         self.symbol_table = {}
         self.full_text = full_text
         
-    def error(self, line):
-        print("\n[GRRRR] You made a dumb syntax error in line " + str(line) + "\n")
+    def error(self, line, type):
+        print("\n[GRRRR] You made a dumb syntax error in line " + str(line))
+        print("[GRRRR] Error in " + type + "\n")
         exit(1)
 
     def eat(self, token_type):
         if self.current_token.type == token_type:
             self.current_token = self.lexer.get_next_token()
         else:
-            self.error(self.current_token.line)
+            self.error(self.current_token.line, "eat")
     
     def goto(self):
         self.eat('GOTO')
@@ -22,7 +23,7 @@ class Interpreter:
             self.lexer.text = self.full_text[self.lexer.line]
             
         else:
-            self.error(self.current_token.line)
+            self.error(self.current_token.line, "goto")
             
     def goif(self):
         self.eat('GOIF')
@@ -39,16 +40,19 @@ class Interpreter:
                         self.lexer.line = line_number - 1
                         self.lexer.text = self.full_text[self.lexer.line]
         else:
-            self.error(self.current_token.line)
+            self.error(self.current_token.line, "goif")
             
     def input_value(self):
         self.eat('INPUT')
         if self.current_token.type == 'IDENTIFIER':
             var_name = self.current_token.value
             self.eat('IDENTIFIER')
-            self.symbol_table[var_name] = input("INPUT> ")
+            inp = input("INPUT> ")
+            if(isinstance(inp, str) and inp.isdigit()):
+                    inp = int(inp)
+            self.symbol_table[var_name] = inp
         else:
-            self.error(self.current_token.line)
+            self.error(self.current_token.line, "input")
 
     def factor(self):
         token = self.current_token
@@ -82,10 +86,8 @@ class Interpreter:
                         self.eat('STRING')
                     else:
                         result = self.term()  # Handle the multiplication operation first
-                        
                     
                     while self.current_token.type in ('PLUS', 'MINUS'):
-                        
                         token = self.current_token
                         if token.type == 'PLUS':
                             self.eat('PLUS')
@@ -101,10 +103,9 @@ class Interpreter:
                     print(self.symbol_table[var_name]) # Print the value of the variable 
                     return self.symbol_table[var_name]
                 else:
-                    self.error(self.current_token.line)
+                    self.error(self.current_token.line, "identifier")
             else:
                 result = self.term()
-
                 while self.current_token.type in ('PLUS', 'MINUS'):
                     token = self.current_token
                     if token.type == 'PLUS':
@@ -145,4 +146,4 @@ class Interpreter:
             if token.value in self.symbol_table:
                 return self.symbol_table[token.value]
             else:
-                self.error(self.current_token.line)
+                self.error(self.current_token.line, "factor")

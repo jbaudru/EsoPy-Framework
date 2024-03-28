@@ -9,19 +9,34 @@ class Lexer:
         self.text = text
         self.pos = 0
         self.line = 0
-
-
+        self.special_characters = ["?", "!", ">", "<", "@", "&", "|", "^", "~", "%", "$", "#", "_", "`", ":", ";", ",", ".", "[", "]", "{", "}", "\\", '"', "'"]
+        # Modify the keywords and symbols to match the language you want to create
+        # {system_token: user_token}
+        """
+        self.keywords = {"GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT", "END": "END"}
+        self.symbols = {"=":"=", "+":"+", "-":"-", "*":"*", "/":"/", "(":"(", ")":")", "@":"@"}
+        """
+        # Example: Esolang 1
+        self.keywords = {"GOTO": "!!!", "GOIF": "???", "INPUT": ">>>", "END": "..."}
+        self.symbols = {"=":"+-+", "+":"---", "-":"+++", "*":"***", "/":"///", "(":"(", ")":")", "@":"@@@"}
+        
+        # Example: Esolang 2 (emojicode)
+        #self.keywords = {"GOTO": "🔜", "GOIF": "🔛", "INPUT": "🔢"}
+        #self.symbols = {"=":"🔗", "+":"➕", "-":"➖", "*":"✖️", "/":"➗", "(":"(", ")":")", "@":"🔚"}
+        
     def error(self):
         print("\n[GRRRR] I don't know the f*cking character " + self.text[self.pos] + " in line " + str(self.line) + "\n")
         exit(1)
         
     def keyword_token(self):
         start = self.pos
-        while self.pos < len(self.text) and self.text[self.pos].isalpha():
+        while self.pos < len(self.text) and (self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters):
             self.pos += 1
-        token = self.text[start:self.pos]
-        if token in ['GOTO', 'GOIF', 'INPUT']:
-            return Token(token, token, self.line)
+        user_token = self.text[start:self.pos]
+        
+        for token, user_token_ref in self.keywords.items():
+            if(user_token == user_token_ref):
+                return Token(token, token, self.line)
         else:
             self.pos = start  # Reset the position if it's not a keyword
 
@@ -31,7 +46,10 @@ class Lexer:
                 self.pos += 1
                 continue
             
-            if self.text[self.pos:self.pos+1] == '@':
+            comment = self.symbols["@"]
+            #print(comment)
+            #print(len(comment))
+            if self.text[self.pos:self.pos+len(comment)] == comment:
                 while self.pos < len(self.text) and self.text[self.pos] != '\n':
                     self.pos += 1
                 continue
@@ -56,39 +74,56 @@ class Lexer:
                 return Token('STRING', self.text[start:end], self.line)
 
             
-            if self.text[self.pos].isalpha():
+            if self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters:
                 token = self.keyword_token()
                 if token:
                     return token
 
                 start = self.pos
-                while self.pos < len(self.text) and self.text[self.pos].isalpha():
+                while self.pos < len(self.text) and (self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters):
                     self.pos += 1
                 return Token('IDENTIFIER', self.text[start:self.pos], self.line)
 
-
-            if self.text[self.pos] == '=':
-                self.pos += 1
+            equal = self.symbols["="]
+            if self.text[self.pos:self.pos+len(equal)] == equal:
+                self.pos += len(equal)
                 return Token('EQUALS', '=', self.line)
-            if self.text[self.pos] == '+':
-                self.pos += 1
+            
+            plus = self.symbols["+"]
+            if self.text[self.pos:self.pos+len(plus)] == plus:
+                self.pos += len(plus)
                 return Token('PLUS', '+', self.line)
-            if self.text[self.pos] == '-':
-                self.pos += 1
+            
+            minus = self.symbols["-"]
+            if self.text[self.pos:self.pos+len(minus)] == minus:
+                self.pos += len(minus)
                 return Token('MINUS', '-', self.line)
-            if self.text[self.pos] == '*':
-                self.pos += 1
+
+            mul = self.symbols["*"]
+            if self.text[self.pos:self.pos+len(mul)] == mul:
+                self.pos += len(mul)
                 return Token('MULTIPLY', '*', self.line)
-            if self.text[self.pos] == '/':
-                self.pos += 1
+            
+            div = self.symbols["/"]
+            if self.text[self.pos:self.pos+len(div)] == div:
+                self.pos += len(div)
                 return Token('DIVIDE', '/', self.line)
-            if self.text[self.pos] == '(':
-                self.pos += 1
+
+            lpar = self.symbols["("]
+            if self.text[self.pos:self.pos+len(lpar)] == lpar:
+                self.pos += len(lpar)
                 return Token('LPAREN', '(', self.line)
-            if self.text[self.pos] == ')':
-                self.pos += 1
+
+            rpar = self.symbols[")"]
+            if self.text[self.pos:self.pos+len(rpar)] == rpar:
+                self.pos += len(rpar)
                 return Token('RPAREN', ')', self.line)
 
+            end = self.keywords["END"]
+            if self.text[self.pos:self.pos+len(end)] == end:
+                quit()
+                #self.pos += len(end)
+                #return Token('END', 'END', self.line)
             
             self.error()
         return Token('EOF', None, self.line)

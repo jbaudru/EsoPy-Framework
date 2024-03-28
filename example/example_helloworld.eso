@@ -1,3 +1,4 @@
 @ Simple Hello World program
 var = "Hello World"
 var
+END

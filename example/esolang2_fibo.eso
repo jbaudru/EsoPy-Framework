@@ -1,0 +1,12 @@
+🔚 Fibonacci sequence
+i 🔗 0
+j 🔗 1
+🔢 counter
+j
+k 🔗 i ➕ j
+i 🔗 j
+j 🔗 k
+counter 🔗 counter ➖ 1
+🔛 12 counter
+🔜 5
+END

@@ -7,9 +7,17 @@ Esoteric programming languages, or esolangs, are programming languages designed 
 
 **This project provides a template for building esoteric programming languages in Python. It includes a lexer and an interpreter, and a main file that ties everything together.**
 
-**You are free to modify and extend this template to create your own esolangs.**
+If you want to define your own esoteric programming language, you can modify the `keywords` and `symbols` dictionaries in the `interpreter.py` file. 
+```
+# dic = {system_token: user_token}
+self.keywords = {"GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT"}
+self.symbols = {"=":"=", "+":"+", "-":"-", "*":"*", "/":"/", "(":"(", ")":")", "@":"@"}
+```
 
-**TODO:** Add a mapping layer for tokens inside the framework and tokens decided by the user.
+You can also modify the `special_characters` list to include any special characters you want to be use as variables names.
+```
+self.special_characters = ["?", "!", ">", "<", "@", "&", "|", "^", "~", "%", "$", "#", "_", "`", ":", ";", ",", ".", "[", "]", "{", "}", "\\", '"', "'"]
+```
 
 ## Files
 - `run.py`: This is the entry point of the project. It reads a *.eso* file line by line, passes each line to the lexer and interpreter, and prints the interpreter's symbol table after each line.
@@ -36,36 +44,43 @@ To use the template, you need to create a *.eso* file with the code you want to 
 ```
 python run.py example.eso
 ```
-**Here is the code from `example_tree.eso`**:
+Here is the default code for `example_fibo.eso`:
 ```
-@ This code prints a small triangle in * char
-size = 5
-
-charstar = "*"
-row = 1
-
-line = ""
-row = row + 1
-line = line + charstar
-row = row - 1
-GOIF 7 row
-line
-size = size - 1
-GOIF 17 size
-GOTO 8
-
-x = "end"
+@ Fibonacci sequence
+i = 0
+j = 1
+INPUT counter
+j
+k = i + j
+i = j
+j = k
+counter = counter - 1
+GOIF 12 counter
+GOTO 5
+END
 ```
-**Output**:
+Here is how the user can modify the keywords and symbols to complexify the code. 
 ```
-*
-**
-***
-****
-*****
+@@@ Fibonacci sequence
+& +-+ 0
+$$ +-+ 1
+>>> #
+$$
+: +-+ & --- $$
+& +-+ $$
+$$ +-+ :
+# +-+ # +++ 1
+??? 12 #
+!!! 5
+...
 ```
+This is language use the following keywords and symbols:
+```
+self.keywords = {"GOTO": "!!!", "GOIF": "???", "INPUT": ">>>"}
+self.symbols = {"=":"+-+", "+":"---", "-":"+++", "*":"***", "/":"///", "(":"(", ")":")", "@":"@@@"}
+``` 
 
-Some example esoteric programming language scripts are provided in the `examples` folder. You can use these as a reference when creating your own scripts. 
+Some example of simple programs in the default language are provided in the `examples` folder. You can use these as a reference when creating your own scripts. 
 
 
 ## Limitations
