@@ -1,6 +1,5 @@
 ![python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![GitHub](https://img.shields.io/github/license/jbaudru/esolang?style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/jbaudru/esolang?style=for-the-badge)
 
 # EsoPy Framework
 
