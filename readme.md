@@ -6,9 +6,22 @@
 
 Esoteric programming languages, or esolangs, are programming languages designed as a test of the boundaries of computer programming language design, as a joke, or as a proof of concept. They're not designed for conventional use, but to explore alternative ways of expressing computational logic. You can learn more about esolangs on [Wikipedia](https://en.wikipedia.org/wiki/Esoteric_programming_language) or on the [Esolangs wiki](https://esolangs.org/wiki/Main_Page).
 
-## Wiki
+## Table of Contents
+- [EsoPy Framework](#esopy-framework)
+  - [Table of Contents](#table-of-contents)
+  - [Wiki](#wiki)
+  - [Principles](#principles)
+  - [Features](#features)
+    - [Instructions set](#instructions-set)
+  - [Usage](#usage)
+    - [Files](#files)
+    - [Running](#running)
+  - [Examples](#examples)
+  - [Limitations](#limitations)
+  - [Future Work](#future-work)
 
-[EsoPy Wiki](https://esolangs.org/wiki/EsoPy_Framework)
+## Wiki
+The EsoPy Framework has a wiki page on the Esolangs wiki. You can find more information about the framework and how to use it on the [EsoPy Wiki](https://esolangs.org/wiki/EsoPy_Framework).
 
 ## Principles
 
@@ -26,11 +39,6 @@ You can also modify the `special_characters` list to include any special charact
 self.special_characters = ["?", "!", ">", "<", "@", "&", "|", "^", "~", "%", "$", "#", "_", "`", ":", ";", ",", ".", "[", "]", "{", "}", "\\", '"', "'"]
 ```
 
-## Files
-- `run.py`: This is the entry point of the project. It reads a *.eso* file line by line, passes each line to the lexer and interpreter, and prints the interpreter's symbol table after each line.
-- `lexer.py`: This file contains the Lexer class which is responsible for breaking the input code into tokens. It also contains the Token class which represents a token.
-- `interpreter.py`: This file contains the Interpreter class which is responsible for parsing and interpreting the tokens produced by the lexer.
-
 ## Features
 The basic language proposed in this framework appears to be Turing complete. A Turing complete language is one that can simulate a Turing machine, meaning it can solve any problem that a Turing machine can, given enough time and memory.
 
@@ -46,13 +54,39 @@ The basic language proposed in this framework appears to be Turing complete. A T
 
 These features collectively allow the language to perform any computation that can be described algorithmically, which is the definition of Turing completeness. However, a formal proof would be required to definitively establish Turing completeness.
 
-## Usage
-To use the template, you need to create a *.eso* file with the code you want to interpret. Then, you can run the main.py file. It will read the *.eso* file line by line, pass each line to the lexer and interpreter, and print the interpreter's symbol table after each line.
+### Instructions set
+| Instruction | Description |
+|-------------|-------------|
+| `<VALUE> + <VALUE>` | Addition, also works with `<VARR>`. |
+| `<VALUE> - <VALUE>` | Subtraction, also works with `<VARR>`. |
+| `<VALUE> * <VALUE>` | Multiplication, also works with `<VARR>`. |
+| `<VALUE> / <VALUE>` | Division, also works with `<VARR>`. |
+| `<VARR> = <VALUE>` | Assignment, also works with `<VARR>`. |
+| `@ Text` | Comment a line. |
+| `GOTO <LINE>` | Jump to a specific line `<LINE>` in the code. |
+| `GOIF <LINE> <VARR>` | Jump based on the value of a variable. If the value of `<VARR>` is 0, the program jumps to the line `<LINE>`. |
+| `INPUT <VARR>` | Input during runtime and store this input in `<VARR>`. |
+| `PRINT <VARR>` | Print the content of `<VARR>`. |
+| `END` | Terminate the program. |
 
-**Here is how to run a file**:
+## Usage
+
+
+### Files
+- `run.py`: This is the entry point of the project. It reads a *.eso* file line by line, passes each line to the lexer and interpreter, and prints the interpreter's symbol table after each line.
+- `lexer.py`: This file contains the Lexer class which is responsible for breaking the input code into tokens. It also contains the Token class which represents a token.
+- `interpreter.py`: This file contains the Interpreter class which is responsible for parsing and interpreting the tokens produced by the lexer.
+
+
+### Running
+To use the template, you need to create a *.eso* file with the code you want to interpret. Then, you can run the `run.py` file. It will read the *.eso* file line by line, pass each line to the lexer and interpreter, and print the interpreter's symbol table after each line.
+
 ```
 python run.py example.eso
 ```
+
+
+## Examples
 Here is the default code for `example_fibo.eso`:
 ```
 @ Fibonacci sequence
