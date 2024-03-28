@@ -63,7 +63,7 @@ GOIF 12 counter
 GOTO 5
 END
 ```
-Here is how the user can modify the keywords and symbols to complexify the code. 
+Here is how the user can modify the keywords and symbols to complexify the code. Code from `esolang1_fibo.eso`:
 ```
 @@@ Fibonacci sequence
 & +-+ 0
@@ -84,7 +84,7 @@ self.keywords = {"PRINT":"<<<", "GOTO": "!!!", "GOIF": "???", "INPUT": ">>>", "E
 self.symbols = {"=":"+-+", "+":"---", "-":"+++", "*":"***", "/":"///", "(":"(", ")":")", "@":"@@@"}
 ``` 
 
-Another example.
+Another example. Code from `esolang2_fibo.eso`:
 ```
 // Fibonacci sequence
 firstValue is 0
