@@ -1,4 +1,4 @@
 @ Simple Cat program
 INPUT a
-a
+PRINT a
 GOTO 1

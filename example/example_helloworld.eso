@@ -1,4 +1,4 @@
 @ Simple Hello World program
 var = "Hello World"
-var
+PRINT var
 END

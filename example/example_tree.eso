@@ -9,7 +9,7 @@ row = row + 1
 line = line + charstar
 row = row - 1
 GOIF 7 row
-line
+PRINT line
 size = size - 1
 GOIF 17 size
 GOTO 8
