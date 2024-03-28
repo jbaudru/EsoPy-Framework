@@ -2,7 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/jbaudru/esolang?style=for-the-badge)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/jbaudru/esolang?style=for-the-badge)
 
-# EsoPy Template
+# EsoPy Framework
 
 Esoteric programming languages, or esolangs, are programming languages designed as a test of the boundaries of computer programming language design, as a joke, or as a proof of concept. They're not designed for conventional use, but to explore alternative ways of expressing computational logic. You can learn more about esolangs on [Wikipedia](https://en.wikipedia.org/wiki/Esoteric_programming_language) or on the [Esolangs wiki](https://esolangs.org/wiki/Main_Page).
 
