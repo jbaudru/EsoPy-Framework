@@ -6,8 +6,9 @@
 
 Esoteric programming languages, or esolangs, are programming languages designed as a test of the boundaries of computer programming language design, as a joke, or as a proof of concept. They're not designed for conventional use, but to explore alternative ways of expressing computational logic. You can learn more about esolangs on [Wikipedia](https://en.wikipedia.org/wiki/Esoteric_programming_language) or on the [Esolangs wiki](https://esolangs.org/wiki/Main_Page).
 
+[EsoPy Wiki](https://esolangs.org/wiki/EsoPy_Framework)
 
-**This project provides a template for building esoteric programming languages in Python. It includes a lexer and an interpreter, and a main file that ties everything together.**
+**This project provides a Python template for building esoteric programming languages. It includes a lexer and an interpreter, and a main file that ties everything together.**
 
 If you want to define your own esoteric programming language, you can modify the `keywords` and `symbols` dictionaries in the `interpreter.py` file. 
 ```
