@@ -54,6 +54,9 @@ The basic language proposed in this framework appears to be Turing complete. A T
 These features collectively allow the language to perform any computation that can be described algorithmically, which is the definition of Turing completeness. However, a formal proof would be required to definitively establish Turing completeness.
 
 ### Instructions set
+
+**TODO:** Add a Stack (ADD & POP)
+
 | Instruction | Description |
 |-------------|-------------|
 | `<VALUE> + <VALUE>` | Addition, also works with `<VARR>`. |
