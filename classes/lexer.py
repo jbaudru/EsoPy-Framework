@@ -13,16 +13,16 @@ class Lexer:
         # Modify the keywords and symbols to match the language you want to create
         # {system_token: user_token}
         """
-        self.keywords = {"GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT", "END": "END"}
+        self.keywords = {"PRINT":"PRINT", "GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT", "END": "END"}
         self.symbols = {"=":"=", "+":"+", "-":"-", "*":"*", "/":"/", "(":"(", ")":")", "@":"@"}
         """
         # Example: Esolang 1
-        self.keywords = {"GOTO": "!!!", "GOIF": "???", "INPUT": ">>>", "END": "..."}
+        self.keywords = {"PRINT":"<<<", "GOTO": "!!!", "GOIF": "???", "INPUT": ">>>", "END": "..."}
         self.symbols = {"=":"+-+", "+":"---", "-":"+++", "*":"***", "/":"///", "(":"(", ")":")", "@":"@@@"}
         
-        # Example: Esolang 2 (emojicode)
-        #self.keywords = {"GOTO": "🔜", "GOIF": "🔛", "INPUT": "🔢"}
-        #self.symbols = {"=":"🔗", "+":"➕", "-":"➖", "*":"✖️", "/":"➗", "(":"(", ")":")", "@":"🔚"}
+        # Example: Esolang 2 
+        self.keywords = {"PRINT":"show", "GOTO": "jumpTo", "GOIF": "ifZeroJumpTo", "INPUT": "writeIn", "END": "finish"}
+        self.symbols = {"=":"is", "+":"plus", "-":"minus", "*":"times", "/":"div", "(":"(", ")":")", "@":"//"}
         
     def error(self):
         print("\n[GRRRR] I don't know the f*cking character " + self.text[self.pos] + " in line " + str(self.line) + "\n")
@@ -79,11 +79,6 @@ class Lexer:
                 if token:
                     return token
 
-                start = self.pos
-                while self.pos < len(self.text) and (self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters):
-                    self.pos += 1
-                return Token('IDENTIFIER', self.text[start:self.pos], self.line)
-
             equal = self.symbols["="]
             if self.text[self.pos:self.pos+len(equal)] == equal:
                 self.pos += len(equal)
@@ -121,9 +116,15 @@ class Lexer:
 
             end = self.keywords["END"]
             if self.text[self.pos:self.pos+len(end)] == end:
-                quit()
-                #self.pos += len(end)
-                #return Token('END', 'END', self.line)
+                self.pos += len(end)
+                return Token('END', 'END', self.line)
+            
+            if (self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters):
+                start = self.pos
+                while self.pos < len(self.text) and (self.text[self.pos].isalpha() or self.text[self.pos] in self.special_characters):
+                    self.pos += 1
+                return Token('IDENTIFIER', self.text[start:self.pos], self.line)
+            
             
             self.error()
         return Token('EOF', None, self.line)

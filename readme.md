@@ -1,4 +1,6 @@
 ![python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+![GitHub](https://img.shields.io/github/license/jbaudru/esolang?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/jbaudru/esolang?style=for-the-badge)
 
 # EsoPy Template
 
@@ -10,7 +12,7 @@ Esoteric programming languages, or esolangs, are programming languages designed 
 If you want to define your own esoteric programming language, you can modify the `keywords` and `symbols` dictionaries in the `interpreter.py` file. 
 ```
 # dic = {system_token: user_token}
-self.keywords = {"GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT"}
+self.keywords = {"PRINT":"PRINT", "GOTO": "GOTO", "GOIF": "GOIF", "INPUT": "INPUT", "END": "END"}
 self.symbols = {"=":"=", "+":"+", "-":"-", "*":"*", "/":"/", "(":"(", ")":")", "@":"@"}
 ```
 
@@ -31,9 +33,11 @@ The basic language proposed in this framework appears to be Turing complete. A T
 - **Variable assignments**: The interpreter allows assigning values to variables. The assigned value can be a number, a string, or an arithmetic expression.
 - **Comments**: The interpreter supports comments. Any text following the `@` symbol until the end of the line is considered a comment and is ignored by the interpreter.
 - **Error handling**: The interpreter has basic error handling. If it encounters a syntax error, it will print an error message and exit.
-- **Loop statement**: The interpreter supports the `GOTO` statement which allows jumping to a specific line in the code.
-- **Conditional statement**: The interpreter supports the `GOIF` statement which allows conditional jumps based on the value of a variable. Its syntax is `GOIF <line_number> <variable_0_or_not>`. If the value of variable is 0, the program jumps to the line number specified. Otherwise, it continues to the next line. This allows for conditional logic and loop creation in the program.
+- **Jump statement**: The interpreter supports the `GOTO` statement which allows jumping to a specific line in the code.
+- **Conditional jump statement**: The interpreter supports the `GOIF` statement which allows conditional jumps based on the value of a variable. Its syntax is `GOIF <line_number> <variable_0_or_not>`. If the value of variable is 0, the program jumps to the line number specified. Otherwise, it continues to the next line. This allows for conditional logic and loop creation in the program.
 - **Input statement**: The interpreter supports the `INPUT` statement which allows user input during runtime.
+- **Print statement**: The interpreter supports the `PRINT` statement which allows printing the value of a variable to the console.
+- **End statement**: The interpreter supports the `END` statement which allows terminating the program.
 
 These features collectively allow the language to perform any computation that can be described algorithmically, which is the definition of Turing completeness. However, a formal proof would be required to definitively establish Turing completeness.
 
@@ -50,7 +54,7 @@ Here is the default code for `example_fibo.eso`:
 i = 0
 j = 1
 INPUT counter
-j
+PRINT j
 k = i + j
 i = j
 j = k
@@ -65,7 +69,7 @@ Here is how the user can modify the keywords and symbols to complexify the code.
 & +-+ 0
 $$ +-+ 1
 >>> #
-$$
+<<< $$
 : +-+ & --- $$
 & +-+ $$
 $$ +-+ :
@@ -76,8 +80,29 @@ $$ +-+ :
 ```
 This is language use the following keywords and symbols:
 ```
-self.keywords = {"GOTO": "!!!", "GOIF": "???", "INPUT": ">>>"}
+self.keywords = {"PRINT":"<<<", "GOTO": "!!!", "GOIF": "???", "INPUT": ">>>", "END": "..."}
 self.symbols = {"=":"+-+", "+":"---", "-":"+++", "*":"***", "/":"///", "(":"(", ")":")", "@":"@@@"}
+``` 
+
+Another example.
+```
+// Fibonacci sequence
+firstValue is 0
+secondValue is 1
+writeIn counter
+show secondValue
+tempoValue is firstValue plus secondValue
+firstValue is secondValue
+secondValue is tempoValue
+counter is counter minus 1
+ifZeroJumpTo 12 counter
+jumpTo 5
+finish
+```
+This is language use the following keywords and symbols:
+```
+self.keywords = {"PRINT":"show", "GOTO": "jumpTo", "GOIF": "ifZeroJumpTo", "INPUT": "writeIn", "END": "finish"}
+self.symbols = {"=":"is", "+":"plus", "-":"minus", "*":"times", "/":"div", "(":"(", ")":")", "@":"//"}
 ``` 
 
 Some example of simple programs in the default language are provided in the `examples` folder. You can use these as a reference when creating your own scripts. 
@@ -90,4 +115,3 @@ Some example of simple programs in the default language are provided in the `exa
 
 ## Future Work
 - Improve error handling by providing more detailed error messages.
-- Implement a layer to transform images into tokens, as suggested by the TODO comment in `run.py`.

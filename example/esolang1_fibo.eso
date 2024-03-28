@@ -1,8 +1,8 @@
-@@@ Example how we can complexify the code
+@@@ Fibonacci sequence
 & +-+ 0
 $$ +-+ 1
 >>> #
-$$
+<<< $$
 : +-+ & --- $$
 & +-+ $$
 $$ +-+ :

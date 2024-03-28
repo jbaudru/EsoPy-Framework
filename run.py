@@ -2,9 +2,6 @@ import sys
 from classes.lexer import Lexer
 from classes.interpreter import Interpreter
 
-#TODO: Layer over to transform Image into Token -> https://teachablemachine.withgoogle.com/train
-# Code with Hand position
-
 def main():
     if len(sys.argv) != 2:
         print('\n[GRRRR] You should try: python run.py <filename.eso> \n')
@@ -15,7 +12,6 @@ def main():
         print('\n[GRRRR] Invalid file type. Dude please provide a .eso file. \n')
         return
 
-    
     text = []
     with open(filename, 'r') as file:
         txt = file.readlines()

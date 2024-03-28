@@ -53,6 +53,18 @@ class Interpreter:
             self.symbol_table[var_name] = inp
         else:
             self.error(self.current_token.line, "input")
+    
+    def print_value(self):
+        self.eat('PRINT')
+        if self.current_token.type == 'IDENTIFIER':
+            var_name = self.current_token.value
+            self.eat('IDENTIFIER')
+            if var_name in self.symbol_table:
+                print(self.symbol_table[var_name])
+            else:
+                self.error(self.current_token.line, "print")
+        else:
+            print(self.expr())
 
     def factor(self):
         token = self.current_token
@@ -75,6 +87,10 @@ class Interpreter:
                 self.goif()
             elif self.current_token.type == 'INPUT':
                 self.input_value()
+            elif self.current_token.type == 'PRINT':
+                self.print_value()
+            elif self.current_token.type == 'END':
+                quit()
             elif self.current_token.type == 'IDENTIFIER':
                 var_name = self.current_token.value
                 self.eat('IDENTIFIER')
@@ -99,11 +115,13 @@ class Interpreter:
                     self.symbol_table[var_name] = result  # Then assign the result to the variable
                     return self.symbol_table[var_name]
 
+                """
                 if var_name in self.symbol_table:
                     print(self.symbol_table[var_name]) # Print the value of the variable 
                     return self.symbol_table[var_name]
                 else:
                     self.error(self.current_token.line, "identifier")
+                """
             else:
                 result = self.term()
                 while self.current_token.type in ('PLUS', 'MINUS'):

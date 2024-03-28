@@ -4,9 +4,10 @@ E = 3 + 4 * 2
 var = "Hello"
 varr = " World"
 res = var + varr
-res
+PRINT res
 C = 5 * F
 @ This is a comment
 B = D * 4
 H = B / 3
-H
+PRINT H
+END

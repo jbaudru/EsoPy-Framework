@@ -2,7 +2,7 @@
 i = 0
 j = 1
 INPUT counter
-j
+PRINT j
 k = i + j
 i = j
 j = k
